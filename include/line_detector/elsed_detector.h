@@ -1,6 +1,6 @@
 #pragma once
 
-#include "line_detector_interface.h"
+#include "line_detector/line_detector_interface.h"
 #include "thirdparty/ELSED/src/ELSED.h"
 
 class ElsedDetector : public LineDetectorInterface
@@ -25,7 +25,7 @@ private:
     }
 
 public:
-    ElsedDetector()=default;
+    ElsedDetector() {std::cout << "create ElsedDetector instance." << std::endl;}
     ElsedDetector(upm::ELSEDParams param) : elsed(param){}
     virtual void DetectLineFeature(cv::Mat img_in) override;
     virtual void ShowDetectedImage(const char* window_title) override;

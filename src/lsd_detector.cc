@@ -41,14 +41,3 @@ void LsdDetector::ShowDetectedImage(const char* window_title)
     }
         cv::imshow(window_title, detected_img);
 }
-
-
-
-
-// int main( int argc, char** argv )
-// {
-//     ros::init(argc, argv, "lsd_detector_node");
-//     LsdDetector lsd_detector;
-//     ros::spin();
-//     return 0;
-// }

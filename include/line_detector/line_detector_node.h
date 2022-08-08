@@ -1,6 +1,9 @@
 #pragma once
 #include <ros/ros.h>
+#include <sensor_msgs/Image.h>
 #include "line_detector/line_detector_interface.h"
+#include "line_detector/elsed_detector.h"
+#include "line_detector/lsd_detector.h"
 
 class LineDetectorNode
 {
@@ -15,10 +18,9 @@ private:
     std::string cv_window_name;
 
 public:
-    LineDetectorNode(LineDetectorInterface& detector, 
-                    std::string in_topic = "/img", 
-                    std::string out_topic = "/detected_img",
-                    std::string window_name = "detected lines");
-    LineDetectorNode()=delete;
+    LineDetectorNode(LineDetectorInterface* detector_, 
+                    std::string in_topic_ = "/img", 
+                    std::string out_topic_ = "/detected_img",
+                    std::string window_name_ = "detected lines");
     void img_cb(sensor_msgs::ImageConstPtr img_in);
 };

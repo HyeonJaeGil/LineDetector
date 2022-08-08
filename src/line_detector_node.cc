@@ -1,18 +1,16 @@
-#include <ros/ros.h>
-#include <sensor_msgs/Image.h>
-#include "line_detector/elsed_detector.h"
-#include "line_detector/lsd_detector.h"
 #include "line_detector/line_detector_node.h"
 
-LineDetectorNode::LineDetectorNode(LineDetectorInterface& detector, 
-                                    std::string in_topic, std::string out_topic, std::string window_name)
+LineDetectorNode::LineDetectorNode(LineDetectorInterface* detector_, 
+                                    std::string in_topic_, 
+                                    std::string out_topic_, 
+                                    std::string window_name_)
 {
-    p_detector = &detector;
-    in_topic = in_topic;
-    out_topic = out_topic;
+    p_detector = detector_;
+    in_topic = in_topic_;
+    out_topic = out_topic_;
     img_sub = nh.subscribe(in_topic, 1, &LineDetectorNode::img_cb, this);
     img_pub = nh.advertise<sensor_msgs::Image>(out_topic, 10);
-    cv_window_name = window_name;
+    cv_window_name = window_name_;
 }
 
 
@@ -31,7 +29,7 @@ int main( int argc, char** argv )
     ros::init(argc, argv, "line_detector_node");
     ElsedDetector elsed_detector;
     LsdDetector lsd_detector;
-    LineDetectorNode(elsed_detector, "/img", "/detected_img", "elsed lines");
+    LineDetectorNode line_detector_node(&lsd_detector);
     ros::spin();
     return 0;
 }

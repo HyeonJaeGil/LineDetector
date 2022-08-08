@@ -16,14 +16,3 @@ void ElsedDetector::ShowDetectedImage(const char* window_title)
     cv::imshow(window_title, detected_img);
 
 }
-
-
-
-
-// int main( int argc, char** argv )
-// {
-//     ros::init(argc, argv, "elsed_detector_node");
-//     ElsedDetector elsed_detector;
-//     ros::spin();
-//     return 0;
-// }
