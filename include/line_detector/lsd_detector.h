@@ -14,8 +14,8 @@ private:
 
 
 public:
-    LsdDetector();
     LsdDetector(std::string in_topic, std::string out_topic);
+    LsdDetector(): LsdDetector("/img", "/lsd"){}
 
     virtual void DetectLineFeature(cv::Mat img_in) override;
     virtual void ShowDetectedImage(char* window_title) override;

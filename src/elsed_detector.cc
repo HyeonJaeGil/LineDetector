@@ -1,13 +1,9 @@
 #include "line_detector/elsed_detector.h"
 
-ElsedDetector::ElsedDetector()
+ElsedDetector::ElsedDetector(std::string in_topic, std::string out_topic)
 {
     img_sub = nh.subscribe(in_topic, 1, &ElsedDetector::img_cb, this);
     img_pub = nh.advertise<sensor_msgs::Image>(out_topic, 10);
-}
-
-ElsedDetector::ElsedDetector(std::string in_topic, std::string out_topic)
-{
     in_topic = in_topic;
     out_topic = out_topic;
 }

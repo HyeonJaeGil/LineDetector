@@ -1,15 +1,12 @@
 #include "line_detector/lsd_detector.h"
 
-
-LsdDetector::LsdDetector(){
-    bd = cv::line_descriptor::LSDDetector::createLSDDetector();
-    lines.clear();
-}
-
 LsdDetector::LsdDetector(std::string in_topic, std::string out_topic){
-
+    img_sub = nh.subscribe(in_topic, 1, &LsdDetector::img_cb, this);
+    img_pub = nh.advertise<sensor_msgs::Image>(out_topic, 10);
     in_topic = in_topic;
     out_topic = out_topic;
+    bd = cv::line_descriptor::LSDDetector::createLSDDetector();
+    lines.clear();
 }
 
 
