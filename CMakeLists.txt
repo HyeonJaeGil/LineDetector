@@ -151,26 +151,16 @@ ${PROJECT_SOURCE_DIR}/include
 ## same as for the library above
 # add_dependencies(${PROJECT_NAME}_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
-add_executable(elsed_detector
+add_executable(line_detector
     src/line_detector_node.cc
     src/elsed_detector.cc
-)
-target_link_libraries(elsed_detector 
-    ${catkin_LIBRARIES} 
-    ${OpenCV_LIBS} 
-    ${PROJECT_SOURCE_DIR}/Thirdparty/ELSED/lib/libelsed.a
-    )
-
-
-add_executable(lsd_detector
-    src/line_detector_node.cc
     src/lsd_detector.cc
 )
-target_link_libraries(lsd_detector 
+target_link_libraries(line_detector 
     ${catkin_LIBRARIES} 
     ${OpenCV_LIBS} 
+    ${CMAKE_SOURCE_DIR}/thirdparty/ELSED/build/libelsed.a
     )
-
 
 ## Specify libraries to link a library or executable target against
 # target_link_libraries(${PROJECT_NAME}_node
