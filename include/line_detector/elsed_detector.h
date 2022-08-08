@@ -25,12 +25,9 @@ private:
     }
 
 public:
-    ElsedDetector(cv::Mat img) : orig_img(img){}
-    ElsedDetector(std::string in_topic, std::string out_topic);
-    ElsedDetector():ElsedDetector("/img", "elsed"){}
+    ElsedDetector()=default;
     ElsedDetector(upm::ELSEDParams param) : elsed(param){}
     virtual void DetectLineFeature(cv::Mat img_in) override;
-    virtual void ShowDetectedImage(char* window_title) override;
-    virtual void img_cb(sensor_msgs::ImageConstPtr img_in) override;
+    virtual void ShowDetectedImage(const char* window_title) override;
 
 };

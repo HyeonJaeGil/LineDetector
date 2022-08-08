@@ -1,10 +1,6 @@
 #include "line_detector/lsd_detector.h"
 
-LsdDetector::LsdDetector(std::string in_topic, std::string out_topic){
-    img_sub = nh.subscribe(in_topic, 1, &LsdDetector::img_cb, this);
-    img_pub = nh.advertise<sensor_msgs::Image>(out_topic, 10);
-    in_topic = in_topic;
-    out_topic = out_topic;
+LsdDetector::LsdDetector(){
     bd = cv::line_descriptor::LSDDetector::createLSDDetector();
     lines.clear();
 }
@@ -19,7 +15,7 @@ void LsdDetector::DetectLineFeature(cv::Mat img_in){
 
 }
 
-void LsdDetector::ShowDetectedImage(char* window_title)
+void LsdDetector::ShowDetectedImage(const char* window_title)
 {
     orig_img.copyTo(detected_img);
     /* draw lines extracted from octave 0 */
@@ -47,14 +43,6 @@ void LsdDetector::ShowDetectedImage(char* window_title)
 }
 
 
-void LsdDetector::img_cb(sensor_msgs::ImageConstPtr img_in)
-{
-    cv_ptr = cv_bridge::toCvCopy(img_in, sensor_msgs::image_encodings::MONO8);
-    assert(!cv_ptr->image.empty());
-    DetectLineFeature(cv_ptr->image);
-    ShowDetectedImage("window");
-    cv::waitKey(1);
-}
 
 
 // int main( int argc, char** argv )

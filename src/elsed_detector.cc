@@ -1,13 +1,5 @@
 #include "line_detector/elsed_detector.h"
 
-ElsedDetector::ElsedDetector(std::string in_topic, std::string out_topic)
-{
-    img_sub = nh.subscribe(in_topic, 1, &ElsedDetector::img_cb, this);
-    img_pub = nh.advertise<sensor_msgs::Image>(out_topic, 10);
-    in_topic = in_topic;
-    out_topic = out_topic;
-}
-
 void ElsedDetector::DetectLineFeature(cv::Mat img_in)
 {
     orig_img = img_in.clone();
@@ -17,7 +9,7 @@ void ElsedDetector::DetectLineFeature(cv::Mat img_in)
     // cv::imshow("ELSED long", img_in);
 }
 
-void ElsedDetector::ShowDetectedImage(char* window_title)
+void ElsedDetector::ShowDetectedImage(const char* window_title)
 {
     detected_img = orig_img.clone();
     drawSegments(detected_img, segs, CV_RGB(0, 255, 0), 2);
@@ -26,14 +18,6 @@ void ElsedDetector::ShowDetectedImage(char* window_title)
 }
 
 
-void ElsedDetector::img_cb(sensor_msgs::ImageConstPtr img_in)
-{
-    cv_ptr = cv_bridge::toCvCopy(img_in, sensor_msgs::image_encodings::MONO8);
-    assert(!cv_ptr->image.empty());
-    DetectLineFeature(cv_ptr->image);
-    ShowDetectedImage("window2");
-    cv::waitKey(1);
-}
 
 
 // int main( int argc, char** argv )
