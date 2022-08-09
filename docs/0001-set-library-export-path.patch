@@ -1,0 +1,41 @@
+From 390a98279530a504d802b99779848a810d5913c4 Mon Sep 17 00:00:00 2001
+From: HyeonJaeGil <now9728@gmail.com>
+Date: Tue, 9 Aug 2022 18:35:40 +0900
+Subject: [PATCH] set library export path
+
+---
+ .gitignore     | 5 ++++-
+ CMakeLists.txt | 2 ++
+ 2 files changed, 6 insertions(+), 1 deletion(-)
+
+diff --git a/.gitignore b/.gitignore
+index 8c48bf9..f0a6ba3 100644
+--- a/.gitignore
++++ b/.gitignore
+@@ -33,4 +33,7 @@
+ 
+ # CLion files
+ .idea/*
+-cmake-build-*
+\ No newline at end of file
++cmake-build-*
++
++# build file
++build/*
+\ No newline at end of file
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 40949b5..bc0c960 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -4,6 +4,8 @@ project(ELSED)
+ find_package(OpenCV REQUIRED)
+ include_directories(${OpenCV_INCLUDE_DIRS})
+ 
++set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib)
++
+ file(GLOB_RECURSE LIB_SOURCES "src/*.cpp" "src/*.h")
+ include_directories(src/include)
+ add_library(elsed ${LIB_SOURCES})
+-- 
+2.17.1
+
